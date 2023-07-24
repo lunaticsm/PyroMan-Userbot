@@ -76,11 +76,7 @@ if not API_HASH:
     LOGGER(__name__).error("No API_HASH Found! Exiting!")
     sys.exit()
 
-if BOTLOG_CHATID:
-    BOTLOG_CHATID = BOTLOG_CHATID
-else:
-    BOTLOG_CHATID = "me"
-
+BOTLOG_CHATID = BOTLOG_CHATID if BOTLOG_CHATID else "me"
 LOOP = asyncio.get_event_loop()
 
 trl = Translator()
@@ -95,11 +91,7 @@ StartTime = time.time()
 
 START_TIME = datetime.now()
 
-TEMP_SETTINGS: Dict[Any, Any] = {}
-TEMP_SETTINGS["PM_COUNT"] = {}
-TEMP_SETTINGS["PM_LAST_MSG"] = {}
-
-
+TEMP_SETTINGS: Dict[Any, Any] = {"PM_COUNT": {}, "PM_LAST_MSG": {}}
 bot1 = (
     Client(
         name="bot1",

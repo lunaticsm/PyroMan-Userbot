@@ -49,8 +49,7 @@ def set_whitelist(user_id, username):
 
 def del_whitelist(user_id):
     with INSERTION_LOCK:
-        user = SESSION.query(WhitelistUsers).get(str(user_id))
-        if user:
+        if user := SESSION.query(WhitelistUsers).get(str(user_id)):
             SESSION.delete(user)
             SESSION.commit()
         else:
@@ -59,11 +58,10 @@ def del_whitelist(user_id):
 
 
 def get_whitelist(user_id):
-    user = SESSION.query(WhitelistUsers).get(str(user_id))
-    rep = ""
-    if user:
+    if user := SESSION.query(WhitelistUsers).get(str(user_id)):
         rep = str(user.username)
-
+    else:
+        rep = ""
     SESSION.close()
     return rep
 
@@ -81,10 +79,9 @@ def set_req(user_id, username):
 
 
 def get_req(user_id):
-    user = SESSION.query(ReqUsers).get(str(user_id))
-    rep = ""
-    if user:
+    if user := SESSION.query(ReqUsers).get(str(user_id)):
         rep = str(user.username)
-
+    else:
+        rep = ""
     SESSION.close()
     return rep
